@@ -1,21 +1,17 @@
-﻿using System;
+﻿using ObserverPattern_WeatherStation.Subject;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace ObserverPattern_WeatherStation.Observers
 {
-    public class HeatIndexDisplay : IObserver, IDisplayElement
+    public class HeatIndexDisplay : DisplayBase
     {
         private float _heatIndex;
-        private ISubject _weatherData;
 
-        public HeatIndexDisplay(ISubject weatherData)
-        {
-            _weatherData = weatherData;
-            _weatherData.RegisterObserver(this);
-        }
+        public HeatIndexDisplay(IObservable weatherData) : base(weatherData) { }
 
-        public void Display()
+        public override void Display()
         {
             Console.WriteLine("Heat Index is {0}", _heatIndex);
         }
@@ -33,10 +29,10 @@ namespace ObserverPattern_WeatherStation.Observers
             return index;
         }
 
-        public void Update(float temp, float humidity, float pressure)
+        public override void Update()
         {
-            _heatIndex = computeHeatIndex(temp, humidity);
-            Display();
+            _heatIndex = computeHeatIndex(_weatherData.GetTemperature(), _weatherData.GetHumidity());
+            base.Update();
         }
     }
 }

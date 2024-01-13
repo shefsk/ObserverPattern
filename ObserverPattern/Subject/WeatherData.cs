@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ObserverPattern_WeatherStation.Subject
 {
-    public class WeatherData : ISubject
+    public class WeatherData : IObservable
     {
         private List<IObserver> _observers;
         private float _temperature;
@@ -16,12 +16,16 @@ namespace ObserverPattern_WeatherStation.Subject
         {
             _observers = new List<IObserver>();    
         }
-        
+
+        public float GetTemperature() { return _temperature; }
+        public float GetHumidity() { return _humidity; }
+        public float GetPressure() { return _pressure; }
+
         public void NotifyObservers()
         {
             foreach (var observer in _observers)
             {
-                observer.Update(_temperature, _humidity, _pressure);
+                observer.Update();
             }
 
         }
@@ -46,9 +50,9 @@ namespace ObserverPattern_WeatherStation.Subject
 
         public void SetMeasurements(float temperature, float humidity, float pressure)
         {
-            this._temperature = temperature;
-            this._humidity = humidity;
-            this._pressure = pressure;
+            _temperature = temperature;
+            _humidity = humidity;
+            _pressure = pressure;
             MeasurementsChanged();
         }
     }
