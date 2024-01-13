@@ -13,7 +13,7 @@ namespace ObserverPattern_WeatherStation
         /// <param name="temp"></param>
         /// <param name="humidity"></param>
         /// <param name="pressure"></param>
-        void Update(float temp, float humidity, float pressure);
+        void Update();
 
     }
 }

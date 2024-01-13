@@ -4,8 +4,12 @@ using System.Text;
 
 namespace ObserverPattern_WeatherStation
 {
-    public interface ISubject
+    public interface IObservable
     {
+        float GetTemperature();
+        float GetHumidity();
+        float GetPressure();
+
         /// <summary>
         /// Registers an observer
         /// </summary>

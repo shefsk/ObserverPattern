@@ -15,12 +15,12 @@ namespace ObserverPattern
             Console.WriteLine("Weather Station");
             Console.WriteLine();
 
-            WeatherData weatherData = new WeatherData();
+            WeatherData weatherData = new();
 
-            CurrentConditionsDisplay currentDisplay = new CurrentConditionsDisplay(weatherData);
-            StatisticsDisplay statisticsDisplay = new StatisticsDisplay(weatherData);
-            ForecastDisplay forecastDisplay = new ForecastDisplay(weatherData);
-            HeatIndexDisplay heatIndexDisplay = new HeatIndexDisplay(weatherData);
+            _ = new CurrentConditionsDisplay(weatherData);
+            _ = new StatisticsDisplay(weatherData);
+            _ = new ForecastDisplay(weatherData);
+            _ = new HeatIndexDisplay(weatherData);
 
             weatherData.SetMeasurements(80, 65, 30.4f);
             Console.WriteLine();

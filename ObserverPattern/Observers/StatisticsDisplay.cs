@@ -4,31 +4,13 @@ using System.Text;
 
 namespace ObserverPattern_WeatherStation.Observers
 {
-    public class StatisticsDisplay : IObserver, IDisplayElement
+    public class StatisticsDisplay : DisplayBase
     {
-        private ISubject _weatherData;
-        private float _temperature;
-        private float _humidity;
-        private float _pressure;
+        public StatisticsDisplay(IObservable weatherData) : base(weatherData) { }
 
-        public StatisticsDisplay(ISubject weatherData)
+        public override void Display()
         {
-            _weatherData = weatherData;
-            weatherData.RegisterObserver(this);
-        }
-
-        public void Display()
-        {
-            Console.WriteLine(String.Format("Avg/Min/Max temperature = {0}/{1}/{2}", _temperature - 1, _temperature, _temperature + 1));
-        }
-
-        public void Update(float temp, float humidity, float pressure)
-        {
-            _temperature = temp;
-            _humidity = humidity;
-            _pressure = pressure;
-
-            Display();
+            Console.WriteLine(String.Format("Avg/Min/Max temperature = {0}/{1}/{2}", _weatherData.GetTemperature() - 1, _weatherData.GetTemperature(), _weatherData.GetTemperature() + 1));
         }
     }
 }
